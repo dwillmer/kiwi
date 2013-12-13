@@ -21,15 +21,15 @@ int main( int argc, char* argv[] )
 	{
 		solver.reset();
 
-		solver.addConstraint( c1 );
-		solver.addConstraint( c2 );
-		solver.addConstraint( c3 );
-		solver.addConstraint( c4 );
-		solver.addConstraint( c5 );
-		solver.addConstraint( c6 );
+		solver.add( c1 );
+		solver.add( c2 );
+		solver.add( c3 );
+		solver.add( c4 );
+		solver.add( c5 );
+		solver.add( c6 );
 
-		solver.removeConstraint( c4 );
-		solver.removeConstraint( c5 );
+		solver.remove( c4 );
+		solver.remove( c5 );
 
 		solver.solve();
 	}

@@ -28,12 +28,12 @@ public:
 
 	If the constraint has already been added, this method is a no-op. If
 	the strength of the constraint is required and the constraint cannot
-	be satisfied, an UnsatisfiableConstraint exception is thrown.
+	be satisfied, an UnsatisfiableConstraint exception will be thrown.
 
 	*/
-	void addConstraint( const Constraint& constraint )
+	void add( const Constraint& constraint )
 	{
-		return m_impl.addConstraint( constraint );
+		m_impl.add( constraint );
 	}
 
 	/* Remove a constraint from the solver.
@@ -42,37 +42,37 @@ public:
 	no-op. This method always succeeds.
 
 	*/
-	void removeConstraint( const Constraint& constraint )
+	void remove( const Constraint& constraint )
 	{
-		return m_impl.removeConstraint( constraint );
+		m_impl.remove( constraint );
+	}
+
+	void addEdit( const Variable& variable, double strength )
+	{
+		m_impl.addEdit( variable, strength );
+	}
+
+	void removeEdit( const Variable& variable )
+	{
+		m_impl.removeEdit( variable );
+	}
+
+	void suggestValue( const Variable& variable double value )
+	{
+		m_impl.suggestValue( variable, value );
 	}
 
 	/* Solve the system for the current set of constraints.
 
-	This method will throw an UnboundedObjective exception if the set of
-	constraints has an unbounded solution.
+	Call this method to resolve the system after making changes to the
+	constraints or edit variables. If the constraints are such that the
+	objective function is unbounded, an UnboundedObjective exception
+	will be thrown.
 
 	*/
 	void solve()
 	{
-		return m_impl.solve();
-	}
-
-	void beginEdit()
-	{
-		return m_impl.beginEdit();
-	}
-
-	void endEdit()
-	{
-		return m_impl.endEdit();
-	}
-
-	void suggestValue( const Variable& variable,
-					   double value,
-					   double strength = strength::strong )
-	{
-		return m_impl.suggestValue( variable, value, strength );
+		m_impl.solve();
 	}
 
 	/* Reset the solver to the empty starting condition.
